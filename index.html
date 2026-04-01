@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamed_Mekkaoui_CV_Dev_PHP</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --accent: #1a3c5e;
+            --accent-mid: #2d6a9f;
+            --text: #1c1c1c;
+            --muted: #555;
+            --rule: #ccd8e4;
+            --sidebar-bg: #f4f7fb;
+            --tag-bg: #ddeaf7;
+            --tag-color: #1a3c5e;
+            --font: 'Segoe UI', Arial, Helvetica, sans-serif;
+            --sidebar-w: 225px;
+        }
+
+        html {
+            font-size: 12px;
+            color: var(--text);
+            font-family: var(--font);
+        }
+
+        body {
+            background: #e9ecef;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        a {
+            color: var(--accent-mid);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .page {
+            background: #fff;
+            width: 900px;
+            max-width: 100%;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .12);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .cv-header {
+            background: var(--accent);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 22px;
+            gap: 20px;
+        }
+
+        .cv-header__name h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: .3px;
+            line-height: 1;
+        }
+
+        .cv-header__name p.title {
+            font-size: 1.1rem;
+            opacity: .88;
+            margin-top: 3px;
+        }
+
+        .cv-header__name p.subtitle {
+            font-size: 1rem;
+            opacity: .65;
+            margin-top: 2px;
+        }
+
+        .cv-header__contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            font-size: .96rem;
+            opacity: .92;
+            white-space: nowrap;
+        }
+
+        .cv-header__contacts a {
+            color: #b8d4f0;
+        }
+
+        .cv-header__contacts a:hover {
+            color: #fff;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .contact-item .icon {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+            font-style: normal;
+            font-size: .74rem;
+        }
+
+        .contact-item.phone span {
+            display: none;
+        }
+
+        .cv-body {
+            display: grid;
+            grid-template-columns: var(--sidebar-w) 1fr;
+            min-height: calc(297mm - 123px);
+        }
+
+        .sidebar {
+            background: var(--sidebar-bg);
+            padding: 20px 16px;
+            border-right: 1px solid var(--rule);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .main {
+            padding: 20px 26px;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .section-title {
+            font-size: .62rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding-bottom: 5px;
+            border-bottom: 2px solid var(--accent);
+            margin-bottom: 11px;
+        }
+
+        .skills-block {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .skill-category {
+            font-size: .72rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 3px;
+        }
+
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--tag-bg);
+            color: var(--tag-color);
+            font-size: .67rem;
+            font-weight: 600;
+            padding: 2px 5px;
+            border-radius: 3px;
+            border: 1px solid #b6cfe8;
+            line-height: 1.3;
+        }
+
+        .tag.primary {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+
+        .tag--inline {
+            font-size: .70rem;
+            font-weight: 500;
+            padding: 1px 4px;
+            border-radius: 2px;
+            vertical-align: baseline;
+        }
+
+        .edu-school {
+            font-size: .80rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .edu-degree {
+            font-size: .75rem;
+            color: var(--text);
+            margin: 2px 0 1px;
+        }
+
+        .edu-location {
+            font-size: .71rem;
+            color: var(--muted);
+        }
+
+        .lang-item {
+            font-size: .78rem;
+            margin-bottom: 4px;
+        }
+
+        .lang-item strong {
+            color: var(--accent);
+        }
+
+        .interests-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .interests-list li {
+            font-size: .75rem;
+            color: var(--muted);
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .interests-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-mid);
+            font-size: .67rem;
+            top: 1px;
+        }
+
+        .entry {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .entry--sub {
+            margin-left: 2px;
+            margin-top: 8px;
+            padding-left: 8px;
+            border-left: 1px solid var(--rule);
+        }
+
+        .exp-section > .entry {
+            margin-bottom: 14px;
+        }
+
+        .exp-section > .entry:last-child {
+            margin-bottom: 0;
+        }
+
+        .entry__header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 2px;
+        }
+
+        .entry__title {
+            font-size: .90rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .entry__title .loc {
+            color: var(--accent-mid);
+            font-weight: 500;
+            font-size: .81rem;
+            margin-left: 5px;
+        }
+
+        .entry--sub .entry__title {
+            font-size: .82rem;
+            color: var(--accent-mid);
+        }
+
+        .entry__date {
+            font-size: .73rem;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+
+        .entry--sub .entry__date {
+            font-size: .71rem;
+        }
+
+        .entry__desc {
+            font-size: .77rem;
+            color: var(--muted);
+            font-style: italic;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .entry--sub .entry__desc {
+            font-size: .74rem;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+
+        .exp-bullets {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 5px;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .exp-bullets li {
+            font-size: .76rem;
+            color: var(--text);
+            padding-left: 12px;
+            position: relative;
+            line-height: 1.38;
+        }
+
+        .exp-bullets li::before {
+            content: '–';
+            position: absolute;
+            left: 0;
+            color: var(--accent-mid);
+            font-weight: 700;
+        }
+
+        .tech-line {
+            font-size: .70rem;
+            text-align: right;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .tech-line .tech-label {
+            font-weight: 700;
+            color: var(--accent);
+            margin-right: 2px;
+        }
+
+        [title] {
+            cursor: help;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 14px;
+        }
+
+        .project-entry {
+            display: flex;
+            flex-direction: column;
+            background: var(--sidebar-bg);
+            border: 1px solid var(--rule);
+            border-radius: 4px;
+            padding: 9px 11px;
+        }
+
+        .project-title {
+            font-size: .83rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .project-year {
+            font-size: .68rem;
+            color: var(--muted);
+            margin-left: 4px;
+            font-weight: 400;
+        }
+
+        .project-desc {
+            font-size: .74rem;
+            color: var(--text);
+            margin: 3px 0 4px;
+            line-height: 1.38;
+        }
+
+        .print-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 100;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 16px;
+            font-size: .8rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, .25);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font);
+            transition: background .15s;
+        }
+
+        .print-btn:hover {
+            background: var(--accent-mid);
+        }
+
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+
+        @media print {
+            html {
+                font-size: 11px;
+            }
+
+            body {
+                background: #fff;
+                padding: 0;
+                display: block;
+                width: 100%;
+            }
+
+            .page {
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .cv-header, .sidebar, .tag, .tag.primary, .project-entry {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            a {
+                text-decoration: underline;
+            }
+
+            .contact-item.phone span {
+                display: block;
+            }
+
+            .contact-item.phone a {
+                display: none;
+            }
+
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <symbol id="ico-location" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1"
+            stroke-linecap="round" stroke-linejoin="round">
+        <path d="M7 1C4.24 1 2 3.24 2 6c0 3.75 5 9 5 9s5-5.25 5-9c0-2.76-2.24-5-5-5z"/>
+        <circle cx="7" cy="6" r="1.5"/>
+    </symbol>
+    <symbol id="ico-phone" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+            stroke-linejoin="round">
+        <path d="M9.221 11.045a0.667 0.667 0 0 0 0.809-.202l.237-.31A1.333 1.333 0 0 1 11.333 10h2a1.333 1.333 0 0 1 1.333 1.333v2a1.333 1.333 0 0 1-1.333 1.333A12 12 0 0 1 1.333 2.667 1.333 1.333 0 0 1 2.667 1.333h2A1.333 1.333 0 0 1 6 2.667v2a1.333 1.333 0 0 1-.533 1.067l-.312.234a0.667 0.667 0 0 0-.195.822 9.333 9.333 0 0 0 4.261 4.256"/>
+    </symbol>
+    <symbol id="ico-mail" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+            stroke-linejoin="round">
+        <rect x="1" y="3" width="12" height="9" rx="1.5"/>
+        <path d="M1 4.5l6 4.5 6-4.5"/>
+    </symbol>
+    <symbol id="ico-linkedin" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1"
+            stroke-linecap="round" stroke-linejoin="round">
+        <rect x="1" y="1" width="12" height="12" rx="2"/>
+        <line x1="4.5" y1="6" x2="4.5" y2="10"/>
+        <circle cx="4.5" cy="4" r="0.6" fill="currentColor" stroke="none"/>
+        <path d="M7 10V7.5C7 6.67 7.67 6 8.5 6S10 6.67 10 7.5V10"/>
+        <line x1="7" y1="6" x2="7" y2="10"/>
+    </symbol>
+    <symbol id="ico-vcs" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+            stroke-linejoin="round">
+        <circle cx="4" cy="3" r="1.5"/>
+        <circle cx="4" cy="11" r="1.5"/>
+        <circle cx="10" cy="3" r="1.5"/>
+        <path d="M4 4.5v5"/>
+        <path d="M10 4.5C10 7 7 8 4 9.5"/>
+    </symbol>
+</svg>
+<button class="print-btn" onclick="window.print()">🖨 Imprimer / PDF</button>
+<article class="page" itemscope itemtype="https://schema.org/Person">
+    <header class="cv-header">
+        <div class="cv-header__name">
+            <h1 itemprop="name">Mohamed MEKKAOUI</h1>
+            <p class="title" itemprop="jobTitle">Développeur Web Confirmé — Spécialiste PHP / Magento / Symfony</p>
+            <p class="subtitle">8 ans d'expérience</p>
+        </div>
+        <address class="cv-header__contacts">
+            <div class="contact-item">
+                <svg class="icon" aria-hidden="true"><use href="#ico-location"/></svg>
+                <span title="Disponible en mobilité sur ces villes">Disponible en mobilité (Paris, Strasbourg, Marseille)</span>
+            </div>
+            <div class="contact-item phone">
+                <svg class="icon" aria-hidden="true"><use href="#ico-phone"/></svg>
+                <a href="tel:0033760374858" itemprop="telephone">+33 7 60 37 48 58</a>
+                <span itemprop="telephone">+33 7 60 37 48 58</a>
+            </div>
+            <div class="contact-item">
+                <svg class="icon" aria-hidden="true"><use href="#ico-mail"/></svg>
+                <a href="mailto:mekkaoui.mpr@gmail.com" itemprop="email" target="_blank">mekkaoui.mpr@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <svg class="icon" aria-hidden="true"><use href="#ico-linkedin"/></svg>
+                <a href="https://www.linkedin.com/in/mekkaoui4/" itemprop="url" target="_tab" rel="noopener">www.linkedin.com/in/mekkaoui4</a>
+            </div>
+            <div class="contact-item">
+                <svg class="icon" aria-hidden="true"><use href="#ico-vcs"/></svg>
+                <a href="https://github.com/medmek" itemprop="sameAs" target="_blank" rel="noopener">www.github.com/medmek</a>
+            </div>
+        </address>
+    </header>
+    <div class="cv-body">
+        <aside class="sidebar">
+            <section aria-labelledby="skills-title">
+                <h2 class="section-title" id="skills-title">Compétences</h2>
+                <div class="skills-block">
+                    <div>
+                        <p class="skill-category">Spécialité</p>
+                        <div class="tag-list">
+                            <span class="tag primary">Magento</span>
+                            <span class="tag primary">PHP</span>
+                            <span class="tag primary">Symfony</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="skill-category">Technologies Web</p>
+                        <div class="tag-list">
+                            <span class="tag" title="JavaScript">JS</span>
+                            <span class="tag" title="TypeScript">TS</span>
+                            <span class="tag">Node.js</span>
+                            <span class="tag">GraphQL</span>
+                            <span class="tag">REST API</span>
+                            <span class="tag">PWA</span>
+                            <span class="tag" title="AngularJS, Angular 2">Angular</span>
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">KnockoutJS</span>
+                            <span class="tag">RequireJS</span>
+                            <span class="tag">jQuery</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">CSS / LESS / SASS</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Nginx / Apache</span>
+                            <span class="tag">Varnish</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="skill-category">Bases de données</p>
+                        <div class="tag-list">
+                            <span class="tag">MySQL</span>
+                            <span class="tag">SQL Server</span>
+                            <span class="tag">MongoDB</span>
+                            <span class="tag">Redis</span>
+                            <span class="tag">Elasticsearch</span>
+                            <span class="tag">Oracle DB</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="skill-category">Frameworks</p>
+                        <div class="tag-list">
+                            <span class="tag">Laravel</span>
+                            <span class="tag">WordPress</span>
+                            <span class="tag">Sylius</span>
+                            <span class="tag">Ionic</span>
+                            <span class="tag">Struts 2</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="skill-category">Ingénierie</p>
+                        <div class="tag-list">
+                            <span class="tag">Agile / Scrum</span>
+                            <span class="tag">Code Review</span>
+                            <span class="tag">MVC / MVVM</span>
+                            <span class="tag">SOLID</span>
+                            <span class="tag">TDD / BDD</span>
+                            <span class="tag">Design Patterns</span>
+                            <span class="tag">CI/CD</span>
+                            <span class="tag">Clean Code</span>
+                            <span class="tag">ARIA</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="skill-category">Outils</p>
+                        <div class="tag-list">
+                            <span class="tag">Linux</span>
+                            <span class="tag">Docker</span>
+                            <span class="tag">WSL</span>
+                            <span class="tag">Vagrant</span>
+                            <span class="tag">Git</span>
+                            <span class="tag">PhpStorm</span>
+                            <span class="tag">VSCode</span>
+                            <span class="tag">Xdebug</span>
+                            <span class="tag">Postman</span>
+                            <span class="tag">Talend</span>
+                            <span class="tag">Gitlab CI/CD</span>
+                            <span class="tag">Jenkins</span>
+                            <span class="tag">Jira / Confluence</span>
+                            <span class="tag">Monday</span>
+                            <span class="tag">Blackfire.io</span>
+                            <span class="tag">SonarQube</span>
+                            <span class="tag">ELK / Kibana</span>
+                            <span class="tag">Grafana</span>
+                            <span class="tag">New Relic</span>
+                            <span class="tag">Composer</span>
+                            <span class="tag">npm</span>
+                            <span class="tag">Webpack</span>
+                            <span class="tag">Google Cloud</span>
+                            <span class="tag">AWS</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section aria-labelledby="edu-title">
+                <h2 class="section-title" id="edu-title">Formation</h2>
+                <p class="edu-school">École Nationale des Sciences Appliquées</p>
+                <p class="edu-degree">Ingénieur d'État — Génie Informatique<br>Option : Qualité Logicielle</p>
+                <p class="edu-location">Oujda · 2012 – 2017</p>
+            </section>
+            <section aria-labelledby="lang-title">
+                <h2 class="section-title" id="lang-title">Langues</h2>
+                <p class="lang-item"><strong>Français</strong> — Bilingue</p>
+                <p class="lang-item"><strong>Anglais</strong> — Courant</p>
+            </section>
+            <section aria-labelledby="interests-title">
+                <h2 class="section-title" id="interests-title">Intérêts</h2>
+                <ul class="interests-list">
+                    <li>Basket-ball, Vélo, Randonnée, Parapente, Simulation de vol, Urbanisme</li>
+                    <li>Membre fondateur du Nippon Sekai Club (Japanime, Cuisine)</li>
+                    <li>Organisation des Journées Portes Ouvertes ENSAO</li>
+                </ul>
+            </section>
+        </aside>
+        <div class="main">
+            <section class="exp-section" aria-labelledby="exp-title">
+                <h2 class="section-title" id="exp-title">Expériences Professionnelles</h2>
+                <div class="entry">
+                    <div class="entry__header">
+              <span class="entry__title">
+                <span>Développeur Web - Oreca</span> <span class="loc">Signes (83)</span>
+              </span>
+                        <span class="entry__date" title="En cours — poste actuel">fév. 2025 – présent</span>
+                    </div>
+                    <p class="entry__desc">Développement et maintenance e-commerce multi-sites pour un acteur mondial du
+                        sport automobile.</p>
+                    <ul class="exp-bullets">
+                        <li>Migration frontend Magento 1 → Magento 2 de la boutique B2B Oreca</li>
+                        <li>Gestion technique de 23 sites (déploiements, configuration, monitoring)</li>
+                        <li>Intégration PayPal Business (Express Checkout) dans Magento</li>
+                        <li>Mise en production, déploiement et développement d'outils internes</li>
+                        <li>Support technique et résolution de bugs</li>
+                        <li>Revue de pairs, refactoring de modules socle</li>
+                    </ul>
+                    <p class="tech-line">
+                        <span class="tech-label">Tech :</span>
+                        <span class="tag tag--inline" title="Magento 1, Magento 2">Magento</span>
+                        <span class="tag tag--inline" title="PHP 7, PHP 8">PHP</span>
+                        <span class="tag tag--inline">WordPress</span>
+                        <span class="tag tag--inline">Symfony</span>
+                        <span class="tag tag--inline" title="Javascript">JS</span>
+                        <span class="tag tag--inline" title="CSS, LESS">CSS</span>
+                        <span class="tag tag--inline" title="MariaDB">Mysql</span>
+                        <span class="tag tag--inline" title="WSL">Docker</span>
+                        <span class="tag tag--inline">PayPal API</span>
+                    </p>
+                </div>
+                <div class="entry">
+                    <div class="entry__header">
+              <span class="entry__title">
+                <span>Consultant Magento 1 - Hermès</span> <span class="loc">Nantes (44)</span>
+              </span>
+                        <span class="entry__date" title="Durée : 4 ans 1 mois">sept. 2020 – oct. 2024</span>
+                    </div>
+                    <p class="entry__desc">Maintenance d'une boutique e-Commerce pour le compte d'un sellier de luxe
+                        Français.</p>
+                    <ul class="exp-bullets">
+                        <li>Participation aux Roll-Out Pays (sorties de nouveaux stores)</li>
+                        <li>Déploiements de versions et monitoring (Kibana…)</li>
+                        <li>Support technique et résolution de bugs</li>
+                        <li>Revue de pairs, rédaction de documentation, animation de formations (KT)</li>
+                    </ul>
+                    <p class="tech-line">
+                        <span class="tech-label">Tech :</span>
+                        <span class="tag tag--inline" title="Magento 1">Magento</span>
+                        <span class="tag tag--inline" title="PHP 5, PHP 7, PHP 8">PHP</span>
+                        <span class="tag tag--inline" title="Javascript, AngularJS">JS</span>
+                        <span class="tag tag--inline">Docker</span>
+                        <span class="tag tag--inline">Bash</span>
+                        <span class="tag tag--inline">SonarQube</span>
+                        <span class="tag tag--inline">ELK</span>
+                        <span class="tag tag--inline">Jenkins</span>
+                    </p>
+                </div>
+                <div class="entry">
+                    <div class="entry__header">
+              <span class="entry__title">
+                <span>Consultant Magento 2 - Business &amp; Décision</span> <span
+                      class="loc">Lyon (69)</span>
+              </span>
+                        <span class="entry__date" title="Durée : 8 mois">janv. – août 2020</span>
+                    </div>
+                    <p class="entry__desc">Missions e-commerce B2B en régie pour deux clients industriels.</p>
+                    <div class="entry entry--sub">
+                        <div class="entry__header">
+                <span class="entry__title">
+                  Coverguard <span class="entry__desc">Maintenance d'une boutique B2B pour un spécialiste d'équipements de protection.</span>
+                </span>
+                            <span class="entry__date" title="Durée : 3 mois">juin – août 2020</span>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Développement de modules (Logger &amp; Contrats), passage aux schémas déclaratifs</li>
+                            <li>Déploiements Production / UAT, support technique, audit SonarQube</li>
+                        </ul>
+                        <p class="tech-line">
+                            <span class="tech-label">Tech :</span>
+                            <span class="tag tag--inline" title="Magento 2">Magento</span>
+                            <span class="tag tag--inline" title="PHP 7">PHP</span>
+                            <span class="tag tag--inline" title="CSS, LESS">CSS</span>
+                            <span class="tag tag--inline">Vagrant</span>
+                            <span class="tag tag--inline">Docker</span>
+                            <span class="tag tag--inline">SonarQube</span>
+                            <span class="tag tag--inline">ELK</span>
+                        </p>
+                    </div>
+                    <div class="entry entry--sub">
+                        <div class="entry__header">
+                <span class="entry__title">
+                  Gerflor <span class="entry__desc">Lancement d'une boutique B2B pour un spécialiste du revêtement de sol.</span>
+                </span>
+                            <span class="entry__date" title="Durée : 6 mois">janv. – juin 2020</span>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Analyse des besoins fonctionnels &amp; techniques et chiffrage</li>
+                            <li>Customisation de thème &amp; développement de modules et fonctionnalités</li>
+                            <li>Gestion de configuration des stores, intégrations de modules partenaires</li>
+                        </ul>
+                        <p class="tech-line">
+                            <span class="tech-label">Tech :</span>
+                            <span class="tag tag--inline" title="Magento 2">Magento</span>
+                            <span class="tag tag--inline" title="PHP 7">PHP</span>
+                            <span class="tag tag--inline">HTML</span>
+                            <span class="tag tag--inline" title="CSS, LESS">CSS</span>
+                            <span class="tag tag--inline" title="Javascript, KnockoutJS">JS</span>
+                            <span class="tag tag--inline" title="MariaDB">Mysql</span>
+                            <span class="tag tag--inline">Nginx</span>
+                            <span class="tag tag--inline">Vagrant</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="entry">
+                    <div class="entry__header">
+              <span class="entry__title">
+                <span>Consultant Magento 2 - Accor</span> <span class="loc">Paris (75)</span>
+              </span>
+                        <span class="entry__date" title="Durée : 4 mois">sept. – déc. 2019</span>
+                    </div>
+                    <p class="entry__desc">Maintenance et support d'une solution e-commerce interne B2B
+                        (hôtellerie).</p>
+                    <ul class="exp-bullets">
+                        <li>Conception et développement de modules et thème</li>
+                        <li>Participation aux réunions de coordination, analyse du besoin, suivi de recette</li>
+                        <li>Suivi du déploiement en production</li>
+                    </ul>
+                    <p class="tech-line">
+                        <span class="tech-label">Tech :</span>
+                        <span class="tag tag--inline" title="Magento 2">Magento</span>
+                        <span class="tag tag--inline" title="PHP 5, PHP 7">PHP</span>
+                        <span class="tag tag--inline">HTML</span>
+                        <span class="tag tag--inline" title="Javascript, KnockoutJS">JS</span>
+                        <span class="tag tag--inline">LXC</span>
+                    </p>
+                </div>
+                <div class="entry">
+                    <div class="entry__header">
+              <span class="entry__title">
+                <span>Ingénieur Concepteur Développeur - SQLI</span> <span class="loc">Oujda (99)</span>
+              </span>
+                        <span class="entry__date" title="Durée : 2 ans 6 mois (dont stage)">fév. 2017 – août 2019</span>
+                    </div>
+                    <div class="entry entry--sub">
+                        <div class="entry__header">
+                            <span class="entry__title">Développeur Web Magento - Novahealth</span>
+                            <span class="entry__date" title="Durée : 1 an 1 mois">juil. 2018 – août 2019</span>
+                        </div>
+                        <p class="entry__desc">Lancement d'une boutique en ligne pour un spécialiste des suppléments
+                            nutritionnels (Magento 2).</p>
+                        <ul class="exp-bullets">
+                            <li>Développement de modules (Import &amp; export de données) et du thème</li>
+                            <li>Gestion de déploiement, POC d'intégration de modules externes</li>
+                        </ul>
+                        <p class="tech-line">
+                            <span class="tech-label">Tech :</span>
+                            <span class="tag tag--inline" title="Magento 2">Magento</span>
+                            <span class="tag tag--inline" title="PHP 7">PHP</span>
+                            <span class="tag tag--inline" title="CSS, LESS">CSS</span>
+                            <span class="tag tag--inline" title="Javascript, KnockoutJS">JS</span>
+                            <span class="tag tag--inline">Vagrant</span>
+                            <span class="tag tag--inline">MySQL</span>
+                            <span class="tag tag--inline">Gitlab CI/CD</span>
+                        </p>
+                    </div>
+                    <div class="entry entry--sub">
+                        <div class="entry__header">
+                            <span class="entry__title">Ingénieur Concepteur Développeur BI - Cdiscount</span>
+                            <span class="entry__date" title="Durée : 11 mois">août 2017 – juil. 2018</span>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Conception et développement ETL et composants (Java)</li>
+                            <li>Analyse des besoins fonctionnels &amp; techniques et chiffrage</li>
+                        </ul>
+                        <p class="tech-line">
+                            <span class="tech-label">Tech :</span>
+                            <span class="tag tag--inline">Talend DI &amp; BD</span>
+                            <span class="tag tag--inline">SQL Server</span>
+                            <span class="tag tag--inline">Oracle DB</span>
+                            <span class="tag tag--inline">MySQL</span>
+                            <span class="tag tag--inline">Java</span>
+                        </p>
+                    </div>
+                    <div class="entry entry--sub">
+                        <div class="entry__header">
+                            <span class="entry__title">Stage de fin d'études</span>
+                            <span class="entry__date" title="Durée : 7 mois">fév. – août 2017</span>
+                        </div>
+                        <p class="entry__desc">Conception et réalisation de modules
+                            Magento 2 : gestion commandes, clients &amp; stocks B2B, estimation de
+                            la date de livraison.</p>
+                        <p class="tech-line">
+                            <span class="tech-label">Tech :</span>
+                            <span class="tag tag--inline" title="Magento 2">Magento</span>
+                            <span class="tag tag--inline" title="PHP 5, PHP 7">PHP</span>
+                            <span class="tag tag--inline" title="Javascript, KnockoutJS">JS</span>
+                            <span class="tag tag--inline">MySQL</span>
+                            <span class="tag tag--inline">Git</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section aria-labelledby="projects-title">
+                <h2 class="section-title" id="projects-title">Réalisations</h2>
+                <div class="projects-grid">
+                    <div class="project-entry">
+                        <div class="entry__header">
+                            <span class="entry__title project-title">Portfolio &amp; Playground</span>
+                            <span class="entry__date project-year" title="~3 mois">2023</span>
+                        </div>
+                        <p class="project-desc">CV interactif, génération de PDF, récupération de données via API
+                            LinkedIn &amp; scraping.</p>
+                        <p class="tech-line">
+                            <span class="tech-label">Tech :</span>
+                            <span title="Symfony 5">Symfony</span>
+                            <span>Vue.js</span>
+                            <span>Gitlab CI/CD</span>
+                            <span>Google Cloud</span>
+                            <span>LinkedIn API</span>
+                        </p>
+                    </div>
+                    <div class="project-entry">
+                        <div class="entry__header">
+                            <span class="entry__title project-title">Amélioration Evalmetrics, ENSAO</span>
+                            <span class="entry__date project-year" title="~6 mois">2016</span>
+                        </div>
+                        <p class="project-desc">Outils d'analyse qualité logicielle (métriques &amp; statistiques).
+                            Refonte en SPA.</p>
+                        <p class="tech-line">
+                            <span class="tech-label">Tech :</span>
+                            <span title="AngularJS">Angular</span>
+                            <span title="Java Entreprise Edition">JEE</span>
+                            <span title="Struts 2">Struts</span>
+                            <span>Git</span>
+                        </p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</article>
+</body>
+</html>
