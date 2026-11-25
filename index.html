@@ -430,11 +430,30 @@
             line-height: 1.38;
         }
 
-        .print-btn {
+        /* i18n: FR is the default; ?lang=en or the toggle switches <html lang> */
+        :root[lang="fr"] [lang="en"],
+        :root[lang="en"] [lang="fr"] {
+            display: none !important;
+        }
+
+        :root[lang="fr"] .tech-label::after {
+            content: ' :';
+        }
+
+        :root[lang="en"] .tech-label::after {
+            content: ':';
+        }
+
+        .toolbar {
             position: fixed;
             bottom: 24px;
             right: 24px;
             z-index: 100;
+            display: flex;
+            gap: 8px;
+        }
+
+        .print-btn {
             background: var(--accent);
             color: #fff;
             border: none;
@@ -496,11 +515,32 @@
                 display: none;
             }
 
-            .print-btn {
+            .toolbar {
                 display: none;
             }
         }
     </style>
+    <script>
+        (function () {
+            var titles = {fr: 'Mohamed_Mekkaoui_CV_Dev_PHP', en: 'Mohamed_Mekkaoui_CV_PHP_Dev'};
+
+            function setLang(lang) {
+                document.documentElement.lang = lang;
+                document.title = titles[lang];
+                try {
+                    var url = new URL(location.href);
+                    if (lang === 'fr') url.searchParams.delete('lang'); else url.searchParams.set('lang', lang);
+                    history.replaceState(null, '', url);
+                } catch (e) {
+                }
+            }
+
+            window.toggleLang = function () {
+                setLang(document.documentElement.lang === 'fr' ? 'en' : 'fr');
+            };
+            setLang(new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : 'fr');
+        })();
+    </script>
 </head>
 <body>
 <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
@@ -538,20 +578,27 @@
         <path d="M10 4.5C10 7 7 8 4 9.5"/>
     </symbol>
 </svg>
-<button class="print-btn" onclick="window.print()">🖨 Imprimer / PDF</button>
+<div class="toolbar">
+    <button class="print-btn" onclick="toggleLang()">🌐 <span lang="fr">English</span><span lang="en">Français</span></button>
+    <button class="print-btn" onclick="window.print()">🖨 <span lang="fr">Imprimer / PDF</span><span lang="en">Print / PDF</span></button>
+</div>
 <article class="page" itemscope itemtype="https://schema.org/Person">
     <header class="cv-header">
         <div class="cv-header__name">
             <h1 itemprop="name">Mohamed MEKKAOUI</h1>
-            <p class="title" itemprop="jobTitle">Développeur Web Confirmé — Spécialiste PHP / Magento / Symfony</p>
-            <p class="subtitle">8 ans d'expérience</p>
+            <p class="title">
+                <span lang="fr" itemprop="jobTitle">Développeur Web Confirmé — Spécialiste PHP / Magento / Symfony</span>
+                <span lang="en" itemprop="jobTitle">Senior Web Developer — PHP / Magento / Symfony Specialist</span>
+            </p>
+            <p class="subtitle"><span lang="fr">8 ans d'expérience</span><span lang="en">8 years of experience</span></p>
         </div>
         <address class="cv-header__contacts">
             <div class="contact-item">
                 <svg aria-hidden="true" class="icon">
                     <use href="#ico-location"/>
                 </svg>
-                <span title="Disponible en mobilité sur ces villes">Disponible en mobilité (Paris, Strasbourg, Lyon)</span>
+                <span lang="fr" title="Disponible en mobilité sur ces villes">Disponible en mobilité (Paris, Strasbourg, Lyon)</span>
+                <span lang="en" title="Open to relocation to these cities">Open to relocation (Paris, Strasbourg, Lyon)</span>
             </div>
             <div class="contact-item phone">
                 <svg aria-hidden="true" class="icon">
@@ -570,7 +617,8 @@
                 <svg aria-hidden="true" class="icon">
                     <use href="#ico-linkedin"/>
                 </svg>
-                <a href="https://www.linkedin.com/in/mekkaoui4/" itemprop="url" rel="noopener" target="_tab">www.linkedin.com/in/mekkaoui4</a>
+                <a lang="fr" href="https://www.linkedin.com/in/mekkaoui4/" itemprop="url" rel="noopener" target="_tab">www.linkedin.com/in/mekkaoui4</a>
+                <a lang="en" href="https://www.linkedin.com/in/mekkaoui4/?locale=en-US" rel="noopener" target="_tab">www.linkedin.com/in/mekkaoui4</a>
             </div>
             <div class="contact-item">
                 <svg aria-hidden="true" class="icon">
@@ -583,10 +631,10 @@
     <div class="cv-body">
         <aside class="sidebar">
             <section aria-labelledby="skills-title">
-                <h2 class="section-title" id="skills-title">Compétences</h2>
+                <h2 class="section-title" id="skills-title"><span lang="fr">Compétences</span><span lang="en">Skills</span></h2>
                 <div class="skills-block">
                     <div>
-                        <p class="skill-category">Spécialité</p>
+                        <p class="skill-category"><span lang="fr">Spécialité</span><span lang="en">Specialty</span></p>
                         <div class="tag-list">
                             <span class="tag primary">Magento 2.4</span>
                             <span class="tag primary">Magento 1.9</span>
@@ -595,7 +643,7 @@
                         </div>
                     </div>
                     <div>
-                        <p class="skill-category">Technologies Web</p>
+                        <p class="skill-category"><span lang="fr">Technologies Web</span><span lang="en">Web Technologies</span></p>
                         <div class="tag-list">
                             <span class="tag">JavaScript</span>
                             <span class="tag">TypeScript</span>
@@ -604,7 +652,7 @@
                             <span class="tag">Angular</span>
                             <span class="tag">Node.js</span>
                             <span class="tag">GraphQL</span>
-                            <span class="tag">API REST</span>
+                            <span class="tag"><span lang="fr">API REST</span><span lang="en">REST API</span></span>
                             <span class="tag">HTML5</span>
                             <span class="tag">CSS / LESS / SASS</span>
                             <span class="tag">Nginx / Apache</span>
@@ -623,7 +671,7 @@
                         </div>
                     </div>
                     <div>
-                        <p class="skill-category">Bases de données</p>
+                        <p class="skill-category"><span lang="fr">Bases de données</span><span lang="en">Databases</span></p>
                         <div class="tag-list">
                             <span class="tag">MySQL / MariaDB</span>
                             <span class="tag">SQL Server</span>
@@ -632,7 +680,7 @@
                         </div>
                     </div>
                     <div>
-                        <p class="skill-category">Méthodes</p>
+                        <p class="skill-category"><span lang="fr">Méthodes</span><span lang="en">Methods</span></p>
                         <div class="tag-list">
                             <span class="tag">Agile / Scrum</span>
                             <span class="tag">Code Review</span>
@@ -643,7 +691,7 @@
                         </div>
                     </div>
                     <div>
-                        <p class="skill-category">Outils &amp; DevOps</p>
+                        <p class="skill-category"><span lang="fr">Outils &amp; DevOps</span><span lang="en">Tools &amp; DevOps</span></p>
                         <div class="tag-list">
                             <span class="tag">Linux</span>
                             <span class="tag">Bash</span>
@@ -666,7 +714,7 @@
             </section>
             <section aria-labelledby="soft-title">
                 <h2 class="section-title" id="soft-title">Soft skills</h2>
-                <ul class="soft-list">
+                <ul class="soft-list" lang="fr">
                     <li><strong>Accompagnement &amp; transmission</strong>Formations KT, documentation, entraide</li>
                     <li><strong>Rigueur &amp; méthode</strong>Revue de code, process, SonarQube</li>
                     <li><strong>Sens de l'analyse</strong>Analyse du besoin, diagnostic d'incidents</li>
@@ -674,48 +722,73 @@
                     <li><strong>Relationnel &amp; communication</strong>Échanges client, chiffrage, recette</li>
                     <li><strong>Force de proposition</strong>Outils internes, refactoring du socle</li>
                 </ul>
+                <ul class="soft-list" lang="en">
+                    <li><strong>Mentoring &amp; knowledge sharing</strong>KT sessions, documentation, peer support</li>
+                    <li><strong>Rigor &amp; method</strong>Code review, processes, SonarQube</li>
+                    <li><strong>Analytical mindset</strong>Requirements analysis, incident diagnosis</li>
+                    <li><strong>Organization</strong>Managing 23 sites, production releases</li>
+                    <li><strong>Communication</strong>Client relations, estimates, acceptance testing</li>
+                    <li><strong>Proactive</strong>Internal tooling, core refactoring</li>
+                </ul>
             </section>
             <section aria-labelledby="edu-title">
-                <h2 class="section-title" id="edu-title">Formation</h2>
-                <p class="edu-school">École Nationale des Sciences Appliquées</p>
-                <p class="edu-degree">Ingénieur d'État — Génie Informatique<br>Option : Qualité Logicielle</p>
-                <p class="edu-location">Maroc · 2012 – 2017</p>
+                <h2 class="section-title" id="edu-title"><span lang="fr">Formation</span><span lang="en">Education</span></h2>
+                <p class="edu-school"><span lang="fr">École Nationale des Sciences Appliquées</span><span lang="en">National School of Applied Sciences</span></p>
+                <p class="edu-degree" lang="fr">Ingénieur d'État — Génie Informatique<br>Option : Qualité Logicielle</p>
+                <p class="edu-degree" lang="en">State Engineering Degree — Computer Science<br>Major: Software Quality</p>
+                <p class="edu-location"><span lang="fr">Maroc</span><span lang="en">Morocco</span> · 2012 – 2017</p>
             </section>
             <section aria-labelledby="lang-title">
-                <h2 class="section-title" id="lang-title">Langues</h2>
-                <p class="lang-item"><strong>Français</strong> — Bilingue (DALF C1)</p>
-                <p class="lang-item"><strong>Anglais</strong> — Courant</p>
+                <h2 class="section-title" id="lang-title"><span lang="fr">Langues</span><span lang="en">Languages</span></h2>
+                <p class="lang-item" lang="fr"><strong>Français</strong> — Bilingue (DALF C1)</p>
+                <p class="lang-item" lang="fr"><strong>Anglais</strong> — Courant</p>
+                <p class="lang-item" lang="en"><strong>French</strong> — Bilingual (DALF C1)</p>
+                <p class="lang-item" lang="en"><strong>English</strong> — Fluent</p>
             </section>
             <section aria-labelledby="interests-title">
-                <h2 class="section-title" id="interests-title">Intérêts</h2>
-                <ul class="interests-list">
+                <h2 class="section-title" id="interests-title"><span lang="fr">Intérêts</span><span lang="en">Interests</span></h2>
+                <ul class="interests-list" lang="fr">
                     <li>Basket-ball, Vélo, Randonnée, Parapente, Simulation de vol, Urbanisme</li>
                     <li>Membre fondateur du Nippon Sekai Club (Japanime, Cuisine)</li>
                     <li>Organisation des Journées Portes Ouvertes ENSAO</li>
+                </ul>
+                <ul class="interests-list" lang="en">
+                    <li>Basketball, Cycling, Hiking, Paragliding, Flight simulation, Urban planning</li>
+                    <li>Founding member of Nippon Sekai Club (Japanese animation, Cooking)</li>
+                    <li>Open Days organizer at ENSAO</li>
                 </ul>
             </section>
         </aside>
         <div class="main">
             <section aria-labelledby="exp-title" class="exp-section">
-                <h2 class="section-title" id="exp-title">Expériences Professionnelles</h2>
+                <h2 class="section-title" id="exp-title"><span lang="fr">Expériences Professionnelles</span><span lang="en">Professional Experience</span></h2>
                 <div class="entry">
                     <div class="entry__header">
               <span class="entry__title">
-                <span>Développeur Web PHP (Magento, Symfony) - Oreca</span> <span class="loc">Signes</span>
+                <span lang="fr">Développeur Web PHP (Magento, Symfony) - Oreca</span><span lang="en">PHP Web Developer (Magento, Symfony) - Oreca</span> <span class="loc">Signes</span>
               </span>
-                        <span class="entry__date" title="Durée : 1 an 5 mois">2025 – 2026</span>
+                        <span class="entry__date"><span lang="fr" title="Durée : 1 an 5 mois">2025 – 2026</span><span lang="en" title="Duration: 1 year 5 months">2025 – 2026</span></span>
                     </div>
-                    <p class="entry__desc">Développement et maintenance e-commerce multi-sites pour un acteur mondial du
+                    <p class="entry__desc" lang="fr">Développement et maintenance e-commerce multi-sites pour un acteur mondial du
                         sport automobile.</p>
-                    <ul class="exp-bullets">
+                    <p class="entry__desc" lang="en">Multi-site e-commerce development and maintenance for a global motorsport
+                        leader.</p>
+                    <ul class="exp-bullets" lang="fr">
                         <li>Migration frontend Magento 1 → Magento 2.4 de la boutique B2B Oreca</li>
                         <li>Gestion technique de 23 sites : configuration, mises en production, monitoring</li>
                         <li>Intégration de PayPal Express Checkout sur 4 sites</li>
                         <li>Outils adoptés en interne (extensions Warden, matrice modules / projets)</li>
                         <li>Revue de code et refactoring des modules socle</li>
                     </ul>
+                    <ul class="exp-bullets" lang="en">
+                        <li>Magento 1 → Magento 2.4 frontend migration of the Oreca B2B store</li>
+                        <li>Technical management of 23 sites: configuration, production releases, monitoring</li>
+                        <li>PayPal Express Checkout integration on 4 sites</li>
+                        <li>Internal tools adopted by the team (Warden extensions, modules / projects matrix)</li>
+                        <li>Code review and refactoring of core modules</li>
+                    </ul>
                     <p class="tech-line">
-                        <span class="tech-label">Tech :</span>
+                        <span class="tech-label">Tech</span>
                         <span class="tag tag--inline">Magento 1</span>
                         <span class="tag tag--inline">Magento 2</span>
                         <span class="tag tag--inline">PHP 7</span>
@@ -732,25 +805,33 @@
                 <div class="entry">
                     <div class="entry__header">
               <span class="entry__title">
-                <span>Consultant Magento - Kalisoft</span>
+                <span lang="fr">Consultant Magento - Kalisoft</span><span lang="en">Magento Consultant - Kalisoft</span>
               </span>
-                        <span class="entry__date" title="Durée : 5 ans (sept. 2019 – oct. 2024)">2019 – 2024</span>
+                        <span class="entry__date"><span lang="fr" title="Durée : 5 ans (sept. 2019 – oct. 2024)">2019 – 2024</span><span lang="en" title="Duration: 5 years (Sep. 2019 – Oct. 2024)">2019 – 2024</span></span>
                     </div>
-                    <p class="entry__desc">ESN : missions Magento 1 et 2 en régie chez des grands comptes (Gerflor et Coverguard via Business &amp; Décision).</p>
+                    <p class="entry__desc" lang="fr">ESN : missions Magento 1 et 2 en régie chez des grands comptes (Gerflor et Coverguard via Business &amp; Décision).</p>
+                    <p class="entry__desc" lang="en">IT consulting firm: on-site Magento 1 &amp; 2 assignments for major accounts (Gerflor and Coverguard via Business &amp; Décision).</p>
                     <div class="entry entry--sub">
                         <div class="entry__header">
-                            <span class="entry__title">Consultant Magento 1 - Hermès <span class="loc">Nantes</span></span>
-                            <span class="entry__date" title="Durée : 4 ans 1 mois">2020 – 2024</span>
+                <span class="entry__title">
+                  Hermès <span class="loc">Nantes</span> <span class="entry__desc" lang="fr">Maintenance d'une boutique e-commerce pour le compte d'un sellier de luxe français.</span><span class="entry__desc" lang="en">E-commerce store maintenance for a French luxury leather house.</span>
+                </span>
+                            <span class="entry__date"><span lang="fr" title="Durée : 4 ans 1 mois">2020 – 2024</span><span lang="en" title="Duration: 4 years 1 month">2020 – 2024</span></span>
                         </div>
-                        <p class="entry__desc">Maintenance d'une boutique e-commerce pour le compte d'un sellier de luxe français.</p>
-                        <ul class="exp-bullets">
+                        <ul class="exp-bullets" lang="fr">
                             <li>Participation aux roll-out pays (ouverture de nouveaux stores)</li>
                             <li>Livraison des versions et suivi de la production (Kibana)</li>
                             <li>Support technique et correction d'anomalies</li>
                             <li>Rédaction de documentation et animation de formations (KT)</li>
                         </ul>
+                        <ul class="exp-bullets" lang="en">
+                            <li>Country roll-outs (new store openings)</li>
+                            <li>Release delivery and production monitoring (Kibana)</li>
+                            <li>Technical support and bug fixing</li>
+                            <li>Documentation writing and knowledge transfer (KT) sessions</li>
+                        </ul>
                         <p class="tech-line">
-                            <span class="tech-label">Tech :</span>
+                            <span class="tech-label">Tech</span>
                             <span class="tag tag--inline">Magento 1</span>
                             <span class="tag tag--inline">PHP 5.6</span>
                             <span class="tag tag--inline">PHP 7.x</span>
@@ -766,16 +847,20 @@
                     <div class="entry entry--sub">
                         <div class="entry__header">
                 <span class="entry__title">
-                  Coverguard <span class="loc">Lyon</span> <span class="entry__desc">Maintenance d'une boutique B2B pour un spécialiste d'équipements de protection.</span>
+                  Coverguard <span class="loc">Lyon</span> <span class="entry__desc" lang="fr">Maintenance d'une boutique B2B pour un spécialiste d'équipements de protection.</span><span class="entry__desc" lang="en">B2B store maintenance for a protective equipment specialist.</span>
                 </span>
-                            <span class="entry__date" title="Durée : 3 mois">2020</span>
+                            <span class="entry__date"><span lang="fr" title="Durée : 3 mois">2020</span><span lang="en" title="Duration: 3 months">2020</span></span>
                         </div>
-                        <ul class="exp-bullets">
+                        <ul class="exp-bullets" lang="fr">
                             <li>Développement de modules (logs, contrats), migration vers les schémas déclaratifs</li>
                             <li>Audit qualité (SonarQube, PHPMD, PHPCS) : rapport livré avec un plan de remédiation priorisé</li>
                         </ul>
+                        <ul class="exp-bullets" lang="en">
+                            <li>Module development (logs, contracts), migration to declarative schema</li>
+                            <li>Quality audit (SonarQube, PHPMD, PHPCS): report delivered with a prioritized remediation plan</li>
+                        </ul>
                         <p class="tech-line">
-                            <span class="tech-label">Tech :</span>
+                            <span class="tech-label">Tech</span>
                             <span class="tag tag--inline">Magento 2</span>
                             <span class="tag tag--inline">PHP 7</span>
                             <span class="tag tag--inline">CSS / LESS</span>
@@ -789,17 +874,22 @@
                     <div class="entry entry--sub">
                         <div class="entry__header">
                 <span class="entry__title">
-                  Gerflor <span class="loc">Lyon</span> <span class="entry__desc">Lancement d'une boutique B2B pour un spécialiste du revêtement de sol.</span>
+                  Gerflor <span class="loc">Lyon</span> <span class="entry__desc" lang="fr">Lancement d'une boutique B2B pour un spécialiste du revêtement de sol.</span><span class="entry__desc" lang="en">B2B store launch for a flooring specialist.</span>
                 </span>
-                            <span class="entry__date" title="Durée : 6 mois">2020</span>
+                            <span class="entry__date"><span lang="fr" title="Durée : 6 mois">2020</span><span lang="en" title="Duration: 6 months">2020</span></span>
                         </div>
-                        <ul class="exp-bullets">
+                        <ul class="exp-bullets" lang="fr">
                             <li>Analyse des besoins fonctionnels et techniques, chiffrage</li>
                             <li>Personnalisation du thème et développement de modules</li>
                             <li>Configuration des stores, intégration de modules partenaires</li>
                         </ul>
+                        <ul class="exp-bullets" lang="en">
+                            <li>Functional and technical requirements analysis, estimates</li>
+                            <li>Theme customization and module development</li>
+                            <li>Store configuration, partner module integration</li>
+                        </ul>
                         <p class="tech-line">
-                            <span class="tech-label">Tech :</span>
+                            <span class="tech-label">Tech</span>
                             <span class="tag tag--inline">Magento 2</span>
                             <span class="tag tag--inline">PHP 7</span>
                             <span class="tag tag--inline">KnockoutJS</span>
@@ -811,16 +901,21 @@
                     </div>
                     <div class="entry entry--sub">
                         <div class="entry__header">
-                            <span class="entry__title">Consultant Magento 2 - Accor <span class="loc">Paris</span></span>
-                            <span class="entry__date" title="Durée : 4 mois">2019</span>
+                <span class="entry__title">
+                  Accor <span class="loc">Paris</span> <span class="entry__desc" lang="fr">Maintenance et support d'une solution e-commerce interne B2B (hôtellerie).</span><span class="entry__desc" lang="en">Maintenance and support of an internal B2B e-commerce solution (hospitality).</span>
+                </span>
+                            <span class="entry__date"><span lang="fr" title="Durée : 4 mois">2019</span><span lang="en" title="Duration: 4 months">2019</span></span>
                         </div>
-                        <p class="entry__desc">Maintenance et support d'une solution e-commerce interne B2B (hôtellerie).</p>
-                        <ul class="exp-bullets">
+                        <ul class="exp-bullets" lang="fr">
                             <li>Conception et développement de modules et du thème</li>
                             <li>Réunions de coordination avec les équipes métier, suivi de recette, mise en production et monitoring</li>
                         </ul>
+                        <ul class="exp-bullets" lang="en">
+                            <li>Design and development of modules and theme</li>
+                            <li>Coordination meetings with business teams, acceptance testing, production release and monitoring</li>
+                        </ul>
                         <p class="tech-line">
-                            <span class="tech-label">Tech :</span>
+                            <span class="tech-label">Tech</span>
                             <span class="tag tag--inline">Magento 2</span>
                             <span class="tag tag--inline">PHP 7</span>
                             <span class="tag tag--inline">KnockoutJS</span>
@@ -832,23 +927,29 @@
                 <div class="entry">
                     <div class="entry__header">
               <span class="entry__title">
-                <span>Ingénieur Concepteur Développeur - SQLI</span> <span class="loc">Maroc</span>
+                <span lang="fr">Ingénieur Concepteur Développeur - SQLI</span><span lang="en">Software Design Engineer - SQLI</span> <span class="loc"><span lang="fr">Maroc</span><span lang="en">Morocco</span></span>
               </span>
-                        <span class="entry__date" title="Durée : 2 ans 6 mois (dont stage)">2017 – 2019</span>
+                        <span class="entry__date"><span lang="fr" title="Durée : 2 ans 6 mois (dont stage)">2017 – 2019</span><span lang="en" title="Duration: 2 years 6 months (incl. internship)">2017 – 2019</span></span>
                     </div>
                     <div class="entry entry--sub">
                         <div class="entry__header">
-                            <span class="entry__title">Développeur Web Magento - Novahealth</span>
-                            <span class="entry__date" title="Durée : 1 an 1 mois">2018 – 2019</span>
+                            <span class="entry__title"><span lang="fr">Développeur Web Magento - Novahealth</span><span lang="en">Magento Web Developer - Novahealth</span></span>
+                            <span class="entry__date"><span lang="fr" title="Durée : 1 an 1 mois">2018 – 2019</span><span lang="en" title="Duration: 1 year 1 month">2018 – 2019</span></span>
                         </div>
-                        <p class="entry__desc">Lancement d'une boutique en ligne pour un spécialiste des suppléments
+                        <p class="entry__desc" lang="fr">Lancement d'une boutique en ligne pour un spécialiste des suppléments
                             nutritionnels (Magento 2).</p>
-                        <ul class="exp-bullets">
+                        <p class="entry__desc" lang="en">Online store launch for a nutritional supplements specialist
+                            (Magento 2).</p>
+                        <ul class="exp-bullets" lang="fr">
                             <li>Modules abonnement, import / export de données et thème</li>
                             <li>Mise en ligne avec déploiement automatisé (GitLab CI/CD)</li>
                         </ul>
+                        <ul class="exp-bullets" lang="en">
+                            <li>Subscription and data import / export modules, theme</li>
+                            <li>Go-live with automated deployment (GitLab CI/CD)</li>
+                        </ul>
                         <p class="tech-line">
-                            <span class="tech-label">Tech :</span>
+                            <span class="tech-label">Tech</span>
                             <span class="tag tag--inline">Magento 2</span>
                             <span class="tag tag--inline">PHP 7</span>
                             <span class="tag tag--inline">CSS / LESS</span>
@@ -859,15 +960,19 @@
                     </div>
                     <div class="entry entry--sub">
                         <div class="entry__header">
-                            <span class="entry__title">Ingénieur Concepteur Développeur BI - Cdiscount</span>
-                            <span class="entry__date" title="Durée : 11 mois">2017 – 2018</span>
+                            <span class="entry__title"><span lang="fr">Ingénieur Concepteur Développeur BI - Cdiscount</span><span lang="en">BI Design &amp; Development Engineer - Cdiscount</span></span>
+                            <span class="entry__date"><span lang="fr" title="Durée : 11 mois">2017 – 2018</span><span lang="en" title="Duration: 11 months">2017 – 2018</span></span>
                         </div>
-                        <ul class="exp-bullets">
+                        <ul class="exp-bullets" lang="fr">
                             <li>Conception et développement de flux ETL et de composants Java</li>
                             <li>Recueil des besoins et estimation des charges</li>
                         </ul>
+                        <ul class="exp-bullets" lang="en">
+                            <li>Design and development of ETL flows and Java components</li>
+                            <li>Requirements gathering and workload estimation</li>
+                        </ul>
                         <p class="tech-line">
-                            <span class="tech-label">Tech :</span>
+                            <span class="tech-label">Tech</span>
                             <span class="tag tag--inline">Talend DI &amp; BD</span>
                             <span class="tag tag--inline">SQL Server</span>
                             <span class="tag tag--inline">Oracle DB</span>
@@ -878,17 +983,20 @@
                     </div>
                     <div class="entry entry--sub">
                         <div class="entry__header">
-                            <span class="entry__title">Stage de fin d'études</span>
-                            <span class="entry__date" title="Durée : 7 mois">2017</span>
+                            <span class="entry__title"><span lang="fr">Stage de fin d'études</span><span lang="en">Final-year internship</span></span>
+                            <span class="entry__date"><span lang="fr" title="Durée : 7 mois">2017</span><span lang="en" title="Duration: 7 months">2017</span></span>
                         </div>
-                        <p class="entry__desc">Conception et réalisation de modules
+                        <p class="entry__desc" lang="fr">Conception et réalisation de modules
                             Magento 2 : gestion commandes, clients &amp; stocks B2B, estimation de
                             la date de livraison.</p>
+                        <p class="entry__desc" lang="en">Design and development of Magento 2 modules: B2B order, customer
+                            &amp; stock management, delivery date estimation.</p>
                         <ul class="exp-bullets">
-                            <li>Capitalisation de deux modules Magento réutilisables</li>
+                            <li lang="fr">Capitalisation de deux modules Magento réutilisables</li>
+                            <li lang="en">Delivered two reusable Magento modules</li>
                         </ul>
                         <p class="tech-line">
-                            <span class="tech-label">Tech :</span>
+                            <span class="tech-label">Tech</span>
                             <span class="tag tag--inline">Magento 2</span>
                             <span class="tag tag--inline">PHP 7</span>
                             <span class="tag tag--inline">KnockoutJS</span>
@@ -901,17 +1009,19 @@
                 </div>
             </section>
             <section aria-labelledby="projects-title">
-                <h2 class="section-title" id="projects-title">Réalisations</h2>
+                <h2 class="section-title" id="projects-title"><span lang="fr">Réalisations</span><span lang="en">Projects</span></h2>
                 <div class="projects-grid">
                     <div class="project-entry">
                         <div class="entry__header">
                             <span class="entry__title project-title">Portfolio &amp; Playground</span>
-                            <span class="entry__date project-year" title="~3 mois">2023</span>
+                            <span class="entry__date project-year"><span lang="fr" title="~3 mois">2023</span><span lang="en" title="~3 months">2023</span></span>
                         </div>
-                        <p class="project-desc">CV interactif, génération de PDF, récupération de données via API
+                        <p class="project-desc" lang="fr">CV interactif, génération de PDF, récupération de données via API
                             LinkedIn &amp; scraping.</p>
+                        <p class="project-desc" lang="en">Interactive CV, PDF generation, data retrieval via LinkedIn API
+                            &amp; scraping.</p>
                         <p class="tech-line">
-                            <span class="tech-label">Tech :</span>
+                            <span class="tech-label">Tech</span>
                             <span>Symfony 5</span>
                             <span>Vue.js</span>
                             <span>Gitlab CI/CD</span>
@@ -921,13 +1031,15 @@
                     </div>
                     <div class="project-entry">
                         <div class="entry__header">
-                            <span class="entry__title project-title">Amélioration Evalmetrics, ENSAO</span>
-                            <span class="entry__date project-year" title="~6 mois">2016</span>
+                            <span class="entry__title project-title"><span lang="fr">Amélioration Evalmetrics, ENSAO</span><span lang="en">Evalmetrics improvement, ENSAO</span></span>
+                            <span class="entry__date project-year"><span lang="fr" title="~6 mois">2016</span><span lang="en" title="~6 months">2016</span></span>
                         </div>
-                        <p class="project-desc">Outils d'analyse qualité logicielle (métriques &amp; statistiques).
+                        <p class="project-desc" lang="fr">Outils d'analyse qualité logicielle (métriques &amp; statistiques).
                             Refonte en SPA.</p>
+                        <p class="project-desc" lang="en">Software quality analysis tools (metrics &amp; statistics).
+                            Rebuilt as an SPA.</p>
                         <p class="tech-line">
-                            <span class="tech-label">Tech :</span>
+                            <span class="tech-label">Tech</span>
                             <span>AngularJS</span>
                             <span title="Java Entreprise Edition">JEE</span>
                             <span>Struts 2</span>
@@ -935,8 +1047,8 @@
                         </p>
                     </div>
                     <a class="qr-entry" href="https://github.com/medmek" rel="noopener" target="_blank">
-                        <svg class="qr" role="img" aria-label="QR code vers github.com/medmek" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><path stroke="#1a3c5e" d="M0 0.5h7m1 0h1m1 0h1m3 0h1m3 0h7m-25 1h1m5 0h1m2 0h1m4 0h1m1 0h1m1 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m1 0h1m3 0h2m4 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m3 0h1m1 0h2m1 0h1m2 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m4 0h1m3 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m1 0h4m1 0h2m1 0h1m1 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-15 1h1m3 0h2m-16 1h1m1 0h1m3 0h2m1 0h2m4 0h2m2 0h1m2 0h1m1 0h1m-25 1h3m1 0h1m2 0h2m3 0h2m1 0h2m1 0h2m1 0h1m1 0h2m-24 1h3m2 0h1m2 0h1m3 0h1m1 0h3m3 0h2m1 0h1m-25 1h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h4m1 0h1m1 0h1m-21 1h1m1 0h4m2 0h1m2 0h1m3 0h1m1 0h2m4 0h1m-24 1h2m1 0h1m3 0h1m1 0h1m4 0h1m1 0h3m3 0h2m-25 1h2m1 0h2m1 0h3m2 0h3m1 0h2m1 0h1m2 0h2m1 0h1m-17 1h1m1 0h1m3 0h2m3 0h3m-22 1h2m4 0h3m1 0h3m2 0h6m2 0h1m-16 1h3m5 0h1m3 0h1m3 0h1m-25 1h7m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m3 0h1m-25 1h1m5 0h1m2 0h1m1 0h1m3 0h2m3 0h1m2 0h1m-24 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h6m2 0h1m-24 1h1m1 0h3m1 0h1m3 0h4m1 0h1m1 0h1m2 0h1m1 0h2m-24 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m2 0h2m1 0h3m1 0h2m-25 1h1m5 0h1m2 0h2m1 0h1m1 0h3m1 0h3m-21 1h7m1 0h1m1 0h3m3 0h3m2 0h1m2 0h1"/></svg>
-                        <span>Mes réalisations<br>github.com/medmek</span>
+                        <svg class="qr" role="img" aria-label="QR code: github.com/medmek" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><path stroke="#1a3c5e" d="M0 0.5h7m1 0h1m1 0h1m3 0h1m3 0h7m-25 1h1m5 0h1m2 0h1m4 0h1m1 0h1m1 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m1 0h1m3 0h2m4 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m3 0h1m1 0h2m1 0h1m2 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m4 0h1m3 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m1 0h4m1 0h2m1 0h1m1 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-15 1h1m3 0h2m-16 1h1m1 0h1m3 0h2m1 0h2m4 0h2m2 0h1m2 0h1m1 0h1m-25 1h3m1 0h1m2 0h2m3 0h2m1 0h2m1 0h2m1 0h1m1 0h2m-24 1h3m2 0h1m2 0h1m3 0h1m1 0h3m3 0h2m1 0h1m-25 1h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h4m1 0h1m1 0h1m-21 1h1m1 0h4m2 0h1m2 0h1m3 0h1m1 0h2m4 0h1m-24 1h2m1 0h1m3 0h1m1 0h1m4 0h1m1 0h3m3 0h2m-25 1h2m1 0h2m1 0h3m2 0h3m1 0h2m1 0h1m2 0h2m1 0h1m-17 1h1m1 0h1m3 0h2m3 0h3m-22 1h2m4 0h3m1 0h3m2 0h6m2 0h1m-16 1h3m5 0h1m3 0h1m3 0h1m-25 1h7m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m3 0h1m-25 1h1m5 0h1m2 0h1m1 0h1m3 0h2m3 0h1m2 0h1m-24 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h6m2 0h1m-24 1h1m1 0h3m1 0h1m3 0h4m1 0h1m1 0h1m2 0h1m1 0h2m-24 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m2 0h2m1 0h3m1 0h2m-25 1h1m5 0h1m2 0h2m1 0h1m1 0h3m1 0h3m-21 1h7m1 0h1m1 0h3m3 0h3m2 0h1m2 0h1"/></svg>
+                        <span><span lang="fr">Mes réalisations</span><span lang="en">My projects</span><br>github.com/medmek</span>
                     </a>
                 </div>
             </section>
