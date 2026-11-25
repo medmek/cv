@@ -68,22 +68,22 @@
         }
 
         .cv-header__name h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            letter-spacing: .3px;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: .5px;
             line-height: 1;
         }
 
         .cv-header__name p.title {
-            font-size: 1.1rem;
-            opacity: .88;
-            margin-top: 3px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-top: 5px;
         }
 
         .cv-header__name p.subtitle {
-            font-size: 1rem;
-            opacity: .65;
-            margin-top: 2px;
+            font-size: 1.05rem;
+            opacity: .85;
+            margin-top: 3px;
         }
 
         .cv-header__contacts {
@@ -142,9 +142,9 @@
         }
 
         .section-title {
-            font-size: .62rem;
+            font-size: .78rem;
             font-weight: 700;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             text-transform: uppercase;
             color: var(--accent);
             padding-bottom: 5px;
@@ -222,6 +222,41 @@
             color: var(--accent);
         }
 
+        .soft-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .soft-list li {
+            font-size: .74rem;
+            line-height: 1.35;
+            color: var(--muted);
+        }
+
+        .soft-list strong {
+            display: block;
+            font-size: .78rem;
+            color: var(--accent);
+        }
+
+        .qr-entry {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            text-align: center;
+            font-size: .68rem;
+        }
+
+        .qr {
+            width: 76px;
+            height: 76px;
+            shape-rendering: crispEdges;
+        }
+
         .interests-list {
             list-style: none;
             display: flex;
@@ -293,6 +328,7 @@
         }
 
         .entry__date {
+            margin-left: auto;
             font-size: .73rem;
             color: var(--muted);
             white-space: nowrap;
@@ -363,7 +399,7 @@
 
         .projects-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr auto;
             gap: 10px 14px;
         }
 
@@ -443,7 +479,7 @@
                 max-width: 100%;
             }
 
-            .cv-header, .sidebar, .tag, .tag.primary, .project-entry {
+            .cv-header, .sidebar, .tag, .tag.primary, .project-entry, .qr {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -552,107 +588,100 @@
                     <div>
                         <p class="skill-category">Spécialité</p>
                         <div class="tag-list">
-                            <span class="tag primary">Magento</span>
-                            <span class="tag primary">PHP</span>
+                            <span class="tag primary">Magento 2.4</span>
+                            <span class="tag primary">Magento 1</span>
+                            <span class="tag primary">PHP 8.x</span>
                             <span class="tag primary">Symfony</span>
                         </div>
                     </div>
                     <div>
                         <p class="skill-category">Technologies Web</p>
                         <div class="tag-list">
-                            <span class="tag" title="JavaScript">JS</span>
-                            <span class="tag" title="TypeScript">TS</span>
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">TypeScript</span>
+                            <span class="tag">KnockoutJS</span>
+                            <span class="tag">Vue.js</span>
+                            <span class="tag">Angular</span>
                             <span class="tag">Node.js</span>
                             <span class="tag">GraphQL</span>
-                            <span class="tag">REST API</span>
-                            <span class="tag">PWA</span>
-                            <span class="tag" title="AngularJS, Angular 2">Angular</span>
-                            <span class="tag">Vue.js</span>
-                            <span class="tag">KnockoutJS</span>
-                            <span class="tag">RequireJS</span>
-                            <span class="tag">jQuery</span>
-                            <span class="tag">HTML</span>
+                            <span class="tag">API REST</span>
+                            <span class="tag">HTML5</span>
                             <span class="tag">CSS / LESS / SASS</span>
-                            <span class="tag">Python</span>
                             <span class="tag">Nginx / Apache</span>
                             <span class="tag">Varnish</span>
                         </div>
                     </div>
                     <div>
-                        <p class="skill-category">Bases de données</p>
-                        <div class="tag-list">
-                            <span class="tag">MySQL</span>
-                            <span class="tag">SQL Server</span>
-                            <span class="tag">MongoDB</span>
-                            <span class="tag">Redis</span>
-                            <span class="tag">Elasticsearch</span>
-                            <span class="tag">Oracle DB</span>
-                        </div>
-                    </div>
-                    <div>
-                        <p class="skill-category">Frameworks</p>
+                        <p class="skill-category">Frameworks &amp; CMS</p>
                         <div class="tag-list">
                             <span class="tag">Laravel</span>
-                            <span class="tag">WordPress</span>
                             <span class="tag">Sylius</span>
-                            <span class="tag">Ionic</span>
-                            <span class="tag">Struts 2</span>
+                            <span class="tag">WordPress</span>
                         </div>
                     </div>
                     <div>
-                        <p class="skill-category">Ingénierie</p>
+                        <p class="skill-category">Bases de données</p>
+                        <div class="tag-list">
+                            <span class="tag">MySQL / MariaDB</span>
+                            <span class="tag">SQL Server</span>
+                            <span class="tag">Redis</span>
+                            <span class="tag">Elasticsearch</span>
+                            <span class="tag">MongoDB</span>
+                        </div>
+                    </div>
+                    <div>
+                        <p class="skill-category">Méthodes</p>
                         <div class="tag-list">
                             <span class="tag">Agile / Scrum</span>
                             <span class="tag">Code Review</span>
-                            <span class="tag">MVC / MVVM</span>
                             <span class="tag">SOLID</span>
-                            <span class="tag">TDD / BDD</span>
                             <span class="tag">Design Patterns</span>
-                            <span class="tag">CI/CD</span>
+                            <span class="tag">TDD / BDD</span>
                             <span class="tag">Clean Code</span>
-                            <span class="tag">ARIA</span>
                         </div>
                     </div>
                     <div>
-                        <p class="skill-category">Outils</p>
+                        <p class="skill-category">Outils &amp; DevOps</p>
                         <div class="tag-list">
                             <span class="tag">Linux</span>
+                            <span class="tag">Bash</span>
                             <span class="tag">Docker</span>
-                            <span class="tag">WSL</span>
-                            <span class="tag">Vagrant</span>
                             <span class="tag">Git</span>
-                            <span class="tag">PhpStorm</span>
-                            <span class="tag">VSCode</span>
-                            <span class="tag">Xdebug</span>
-                            <span class="tag">Postman</span>
-                            <span class="tag">Talend</span>
-                            <span class="tag">Gitlab CI/CD</span>
+                            <span class="tag">GitLab CI/CD</span>
                             <span class="tag">Jenkins</span>
-                            <span class="tag">Jira / Confluence</span>
-                            <span class="tag">Monday</span>
+                            <span class="tag">Composer</span>
                             <span class="tag">Blackfire.io</span>
                             <span class="tag">SonarQube</span>
                             <span class="tag">ELK / Kibana</span>
-                            <span class="tag">Grafana</span>
                             <span class="tag">New Relic</span>
-                            <span class="tag">Composer</span>
-                            <span class="tag">npm</span>
-                            <span class="tag">Webpack</span>
-                            <span class="tag">Google Cloud</span>
+                            <span class="tag">Jira / Confluence</span>
+                            <span class="tag">Talend</span>
                             <span class="tag">AWS</span>
+                            <span class="tag">Google Cloud</span>
                         </div>
                     </div>
                 </div>
+            </section>
+            <section aria-labelledby="soft-title">
+                <h2 class="section-title" id="soft-title">Soft skills</h2>
+                <ul class="soft-list">
+                    <li><strong>Accompagnement &amp; transmission</strong>Formations KT, documentation, entraide</li>
+                    <li><strong>Rigueur &amp; méthode</strong>Revue de code, process, SonarQube</li>
+                    <li><strong>Sens de l'analyse</strong>Analyse du besoin, diagnostic d'incidents</li>
+                    <li><strong>Organisation</strong>Suivi de 23 sites, mises en production</li>
+                    <li><strong>Relationnel &amp; communication</strong>Échanges client, chiffrage, recette</li>
+                    <li><strong>Force de proposition</strong>Outils internes, refactoring du socle</li>
+                </ul>
             </section>
             <section aria-labelledby="edu-title">
                 <h2 class="section-title" id="edu-title">Formation</h2>
                 <p class="edu-school">École Nationale des Sciences Appliquées</p>
                 <p class="edu-degree">Ingénieur d'État — Génie Informatique<br>Option : Qualité Logicielle</p>
-                <p class="edu-location">Oujda · 2012 – 2017</p>
+                <p class="edu-location">Maroc · 2012 – 2017</p>
             </section>
             <section aria-labelledby="lang-title">
                 <h2 class="section-title" id="lang-title">Langues</h2>
-                <p class="lang-item"><strong>Français</strong> — Bilingue</p>
+                <p class="lang-item"><strong>Français</strong> — Bilingue (DALF C1)</p>
                 <p class="lang-item"><strong>Anglais</strong> — Courant</p>
             </section>
             <section aria-labelledby="interests-title">
@@ -670,53 +699,52 @@
                 <div class="entry">
                     <div class="entry__header">
               <span class="entry__title">
-                <span>Développeur Web - Oreca</span> <span class="loc">Signes (83)</span>
+                <span>Développeur Web - Oreca</span> <span class="loc">Signes</span>
               </span>
-                        <span class="entry__date" title="Durée : 1 an 5 mois">fév. 2025 – juin 2026</span>
+                        <span class="entry__date" title="Durée : 1 an 5 mois">2025 – 2026</span>
                     </div>
                     <p class="entry__desc">Développement et maintenance e-commerce multi-sites pour un acteur mondial du
                         sport automobile.</p>
                     <ul class="exp-bullets">
-                        <li>Migration frontend Magento 1 → Magento 2 de la boutique B2B Oreca</li>
-                        <li>Gestion technique de 23 sites (déploiements, configuration, monitoring)</li>
-                        <li>Intégration PayPal Business (Express Checkout) dans Magento</li>
-                        <li>Mise en production, déploiement et développement d'outils internes</li>
-                        <li>Support technique et résolution de bugs</li>
-                        <li>Revue de pairs, refactoring de modules socle</li>
+                        <li>Migration frontend Magento 1 → Magento 2.4 de la boutique B2B Oreca</li>
+                        <li>Gestion technique de 23 sites : configuration, mises en production, monitoring</li>
+                        <li>Intégration de PayPal Business (Express Checkout)</li>
+                        <li>Développement d'outils internes</li>
+                        <li>Revue de code et refactoring des modules socle</li>
                     </ul>
                     <p class="tech-line">
                         <span class="tech-label">Tech :</span>
-                        <span class="tag tag--inline" title="Magento 1, Magento 2">Magento</span>
-                        <span class="tag tag--inline" title="PHP 7, PHP 8">PHP</span>
+                        <span class="tag tag--inline">Magento 1 / 2.4</span>
+                        <span class="tag tag--inline">PHP 7 / 8.x</span>
                         <span class="tag tag--inline">WordPress</span>
                         <span class="tag tag--inline">Symfony</span>
-                        <span class="tag tag--inline" title="Javascript">JS</span>
-                        <span class="tag tag--inline" title="CSS, LESS">CSS</span>
-                        <span class="tag tag--inline" title="MariaDB">Mysql</span>
-                        <span class="tag tag--inline" title="WSL">Docker</span>
+                        <span class="tag tag--inline">JavaScript</span>
+                        <span class="tag tag--inline">CSS / LESS</span>
+                        <span class="tag tag--inline">MariaDB</span>
+                        <span class="tag tag--inline">Docker</span>
                         <span class="tag tag--inline">PayPal API</span>
                     </p>
                 </div>
                 <div class="entry">
                     <div class="entry__header">
               <span class="entry__title">
-                <span>Consultant Magento 1 - Hermès</span> <span class="loc">Nantes (44)</span>
+                <span>Consultant Magento 1 - Hermès</span> <span class="loc">Nantes</span>
               </span>
-                        <span class="entry__date" title="Durée : 4 ans 1 mois">sept. 2020 – oct. 2024</span>
+                        <span class="entry__date" title="Durée : 4 ans 1 mois">2020 – 2024</span>
                     </div>
                     <p class="entry__desc">Maintenance d'une boutique e-Commerce pour le compte d'un sellier de luxe
                         Français.</p>
                     <ul class="exp-bullets">
-                        <li>Participation aux Roll-Out Pays (sorties de nouveaux stores)</li>
-                        <li>Déploiements de versions et monitoring (Kibana…)</li>
-                        <li>Support technique et résolution de bugs</li>
-                        <li>Revue de pairs, rédaction de documentation, animation de formations (KT)</li>
+                        <li>Participation aux roll-out pays (ouverture de nouveaux stores)</li>
+                        <li>Livraison des versions et suivi de la production (Kibana)</li>
+                        <li>Support technique et correction d'anomalies</li>
+                        <li>Rédaction de documentation et animation de formations (KT)</li>
                     </ul>
                     <p class="tech-line">
                         <span class="tech-label">Tech :</span>
-                        <span class="tag tag--inline" title="Magento 1">Magento</span>
-                        <span class="tag tag--inline" title="PHP 5, PHP 7, PHP 8">PHP</span>
-                        <span class="tag tag--inline" title="Javascript, AngularJS">JS</span>
+                        <span class="tag tag--inline">Magento 1</span>
+                        <span class="tag tag--inline">PHP 5 → 8</span>
+                        <span class="tag tag--inline">AngularJS</span>
                         <span class="tag tag--inline">Docker</span>
                         <span class="tag tag--inline">Bash</span>
                         <span class="tag tag--inline">SonarQube</span>
@@ -728,9 +756,9 @@
                     <div class="entry__header">
               <span class="entry__title">
                 <span>Consultant Magento 2 - Business &amp; Décision</span> <span
-                      class="loc">Lyon (69)</span>
+                      class="loc">Lyon</span>
               </span>
-                        <span class="entry__date" title="Durée : 8 mois">janv. – août 2020</span>
+                        <span class="entry__date" title="Durée : 8 mois">2020</span>
                     </div>
                     <p class="entry__desc">Missions e-commerce B2B en régie pour deux clients industriels.</p>
                     <div class="entry entry--sub">
@@ -738,18 +766,17 @@
                 <span class="entry__title">
                   Coverguard <span class="entry__desc">Maintenance d'une boutique B2B pour un spécialiste d'équipements de protection.</span>
                 </span>
-                            <span class="entry__date" title="Durée : 3 mois">juin – août 2020</span>
+                            <span class="entry__date" title="Durée : 3 mois">2020</span>
                         </div>
                         <ul class="exp-bullets">
-                            <li>Développement de modules (Logger &amp; Contrats), passage aux schémas déclaratifs</li>
-                            <li>Déploiements Production / UAT, support technique, audit SonarQube</li>
+                            <li>Développement de modules (logs, contrats), migration vers les schémas déclaratifs</li>
+                            <li>Audit qualité SonarQube, livraisons en recette (UAT) et production</li>
                         </ul>
                         <p class="tech-line">
                             <span class="tech-label">Tech :</span>
-                            <span class="tag tag--inline" title="Magento 2">Magento</span>
-                            <span class="tag tag--inline" title="PHP 7">PHP</span>
-                            <span class="tag tag--inline" title="CSS, LESS">CSS</span>
-                            <span class="tag tag--inline">Vagrant</span>
+                            <span class="tag tag--inline">Magento 2</span>
+                            <span class="tag tag--inline">PHP 7</span>
+                            <span class="tag tag--inline">CSS / LESS</span>
                             <span class="tag tag--inline">Docker</span>
                             <span class="tag tag--inline">SonarQube</span>
                             <span class="tag tag--inline">ELK</span>
@@ -760,74 +787,69 @@
                 <span class="entry__title">
                   Gerflor <span class="entry__desc">Lancement d'une boutique B2B pour un spécialiste du revêtement de sol.</span>
                 </span>
-                            <span class="entry__date" title="Durée : 6 mois">janv. – juin 2020</span>
+                            <span class="entry__date" title="Durée : 6 mois">2020</span>
                         </div>
                         <ul class="exp-bullets">
-                            <li>Analyse des besoins fonctionnels &amp; techniques et chiffrage</li>
-                            <li>Customisation de thème &amp; développement de modules et fonctionnalités</li>
-                            <li>Gestion de configuration des stores, intégrations de modules partenaires</li>
+                            <li>Analyse des besoins fonctionnels et techniques, chiffrage</li>
+                            <li>Personnalisation du thème et développement de modules</li>
+                            <li>Configuration des stores, intégration de modules partenaires</li>
                         </ul>
                         <p class="tech-line">
                             <span class="tech-label">Tech :</span>
-                            <span class="tag tag--inline" title="Magento 2">Magento</span>
-                            <span class="tag tag--inline" title="PHP 7">PHP</span>
-                            <span class="tag tag--inline">HTML</span>
-                            <span class="tag tag--inline" title="CSS, LESS">CSS</span>
-                            <span class="tag tag--inline" title="Javascript, KnockoutJS">JS</span>
-                            <span class="tag tag--inline" title="MariaDB">Mysql</span>
+                            <span class="tag tag--inline">Magento 2</span>
+                            <span class="tag tag--inline">PHP 7</span>
+                            <span class="tag tag--inline">KnockoutJS</span>
+                            <span class="tag tag--inline">CSS / LESS</span>
+                            <span class="tag tag--inline">MariaDB</span>
                             <span class="tag tag--inline">Nginx</span>
-                            <span class="tag tag--inline">Vagrant</span>
                         </p>
                     </div>
                 </div>
                 <div class="entry">
                     <div class="entry__header">
               <span class="entry__title">
-                <span>Consultant Magento 2 - Accor</span> <span class="loc">Paris (75)</span>
+                <span>Consultant Magento 2 - Accor</span> <span class="loc">Paris</span>
               </span>
-                        <span class="entry__date" title="Durée : 4 mois">sept. – déc. 2019</span>
+                        <span class="entry__date" title="Durée : 4 mois">2019</span>
                     </div>
                     <p class="entry__desc">Maintenance et support d'une solution e-commerce interne B2B
                         (hôtellerie).</p>
                     <ul class="exp-bullets">
-                        <li>Conception et développement de modules et thème</li>
-                        <li>Participation aux réunions de coordination, analyse du besoin, suivi de recette</li>
-                        <li>Suivi du déploiement en production</li>
+                        <li>Conception et développement de modules et du thème</li>
+                        <li>Réunions de coordination avec les équipes métier, suivi de recette et de la mise en production</li>
                     </ul>
                     <p class="tech-line">
                         <span class="tech-label">Tech :</span>
-                        <span class="tag tag--inline" title="Magento 2">Magento</span>
-                        <span class="tag tag--inline" title="PHP 5, PHP 7">PHP</span>
-                        <span class="tag tag--inline">HTML</span>
-                        <span class="tag tag--inline" title="Javascript, KnockoutJS">JS</span>
+                        <span class="tag tag--inline">Magento 2</span>
+                        <span class="tag tag--inline">PHP 7</span>
+                        <span class="tag tag--inline">KnockoutJS</span>
                         <span class="tag tag--inline">LXC</span>
                     </p>
                 </div>
                 <div class="entry">
                     <div class="entry__header">
               <span class="entry__title">
-                <span>Ingénieur Concepteur Développeur - SQLI</span> <span class="loc">Oujda (99)</span>
+                <span>Ingénieur Concepteur Développeur - SQLI</span> <span class="loc">Maroc</span>
               </span>
-                        <span class="entry__date" title="Durée : 2 ans 6 mois (dont stage)">fév. 2017 – août 2019</span>
+                        <span class="entry__date" title="Durée : 2 ans 6 mois (dont stage)">2017 – 2019</span>
                     </div>
                     <div class="entry entry--sub">
                         <div class="entry__header">
                             <span class="entry__title">Développeur Web Magento - Novahealth</span>
-                            <span class="entry__date" title="Durée : 1 an 1 mois">juil. 2018 – août 2019</span>
+                            <span class="entry__date" title="Durée : 1 an 1 mois">2018 – 2019</span>
                         </div>
                         <p class="entry__desc">Lancement d'une boutique en ligne pour un spécialiste des suppléments
                             nutritionnels (Magento 2).</p>
                         <ul class="exp-bullets">
-                            <li>Développement de modules (Import &amp; export de données) et du thème</li>
-                            <li>Gestion de déploiement, POC d'intégration de modules externes</li>
+                            <li>Développement du thème et de modules d'import / export de données</li>
+                            <li>POC d'intégration de modules tiers, gestion des déploiements</li>
                         </ul>
                         <p class="tech-line">
                             <span class="tech-label">Tech :</span>
-                            <span class="tag tag--inline" title="Magento 2">Magento</span>
-                            <span class="tag tag--inline" title="PHP 7">PHP</span>
-                            <span class="tag tag--inline" title="CSS, LESS">CSS</span>
-                            <span class="tag tag--inline" title="Javascript, KnockoutJS">JS</span>
-                            <span class="tag tag--inline">Vagrant</span>
+                            <span class="tag tag--inline">Magento 2</span>
+                            <span class="tag tag--inline">PHP 7</span>
+                            <span class="tag tag--inline">CSS / LESS</span>
+                            <span class="tag tag--inline">KnockoutJS</span>
                             <span class="tag tag--inline">MySQL</span>
                             <span class="tag tag--inline">Gitlab CI/CD</span>
                         </p>
@@ -835,11 +857,11 @@
                     <div class="entry entry--sub">
                         <div class="entry__header">
                             <span class="entry__title">Ingénieur Concepteur Développeur BI - Cdiscount</span>
-                            <span class="entry__date" title="Durée : 11 mois">août 2017 – juil. 2018</span>
+                            <span class="entry__date" title="Durée : 11 mois">2017 – 2018</span>
                         </div>
                         <ul class="exp-bullets">
-                            <li>Conception et développement ETL et composants (Java)</li>
-                            <li>Analyse des besoins fonctionnels &amp; techniques et chiffrage</li>
+                            <li>Conception et développement de flux ETL et de composants Java</li>
+                            <li>Recueil des besoins et estimation des charges</li>
                         </ul>
                         <p class="tech-line">
                             <span class="tech-label">Tech :</span>
@@ -853,16 +875,16 @@
                     <div class="entry entry--sub">
                         <div class="entry__header">
                             <span class="entry__title">Stage de fin d'études</span>
-                            <span class="entry__date" title="Durée : 7 mois">fév. – août 2017</span>
+                            <span class="entry__date" title="Durée : 7 mois">2017</span>
                         </div>
                         <p class="entry__desc">Conception et réalisation de modules
                             Magento 2 : gestion commandes, clients &amp; stocks B2B, estimation de
                             la date de livraison.</p>
                         <p class="tech-line">
                             <span class="tech-label">Tech :</span>
-                            <span class="tag tag--inline" title="Magento 2">Magento</span>
-                            <span class="tag tag--inline" title="PHP 5, PHP 7">PHP</span>
-                            <span class="tag tag--inline" title="Javascript, KnockoutJS">JS</span>
+                            <span class="tag tag--inline">Magento 2</span>
+                            <span class="tag tag--inline">PHP 7</span>
+                            <span class="tag tag--inline">KnockoutJS</span>
                             <span class="tag tag--inline">MySQL</span>
                             <span class="tag tag--inline">Git</span>
                         </p>
@@ -881,7 +903,7 @@
                             LinkedIn &amp; scraping.</p>
                         <p class="tech-line">
                             <span class="tech-label">Tech :</span>
-                            <span title="Symfony 5">Symfony</span>
+                            <span>Symfony 5</span>
                             <span>Vue.js</span>
                             <span>Gitlab CI/CD</span>
                             <span>Google Cloud</span>
@@ -897,12 +919,16 @@
                             Refonte en SPA.</p>
                         <p class="tech-line">
                             <span class="tech-label">Tech :</span>
-                            <span title="AngularJS">Angular</span>
+                            <span>AngularJS</span>
                             <span title="Java Entreprise Edition">JEE</span>
-                            <span title="Struts 2">Struts</span>
+                            <span>Struts 2</span>
                             <span>Git</span>
                         </p>
                     </div>
+                    <a class="qr-entry" href="https://github.com/medmek" rel="noopener" target="_blank">
+                        <svg class="qr" role="img" aria-label="QR code vers github.com/medmek" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25"><path stroke="#1a3c5e" d="M0 0.5h7m1 0h1m1 0h1m3 0h1m3 0h7m-25 1h1m5 0h1m2 0h1m4 0h1m1 0h1m1 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m1 0h1m3 0h2m4 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m3 0h1m1 0h2m1 0h1m2 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m2 0h1m4 0h1m3 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m1 0h4m1 0h2m1 0h1m1 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-15 1h1m3 0h2m-16 1h1m1 0h1m3 0h2m1 0h2m4 0h2m2 0h1m2 0h1m1 0h1m-25 1h3m1 0h1m2 0h2m3 0h2m1 0h2m1 0h2m1 0h1m1 0h2m-24 1h3m2 0h1m2 0h1m3 0h1m1 0h3m3 0h2m1 0h1m-25 1h1m1 0h1m1 0h1m2 0h1m1 0h1m1 0h2m1 0h4m1 0h1m1 0h1m-21 1h1m1 0h4m2 0h1m2 0h1m3 0h1m1 0h2m4 0h1m-24 1h2m1 0h1m3 0h1m1 0h1m4 0h1m1 0h3m3 0h2m-25 1h2m1 0h2m1 0h3m2 0h3m1 0h2m1 0h1m2 0h2m1 0h1m-17 1h1m1 0h1m3 0h2m3 0h3m-22 1h2m4 0h3m1 0h3m2 0h6m2 0h1m-16 1h3m5 0h1m3 0h1m3 0h1m-25 1h7m1 0h2m1 0h1m1 0h1m2 0h1m1 0h1m1 0h1m3 0h1m-25 1h1m5 0h1m2 0h1m1 0h1m3 0h2m3 0h1m2 0h1m-24 1h1m1 0h3m1 0h1m2 0h2m1 0h1m2 0h6m2 0h1m-24 1h1m1 0h3m1 0h1m3 0h4m1 0h1m1 0h1m2 0h1m1 0h2m-24 1h1m1 0h3m1 0h1m1 0h2m1 0h1m1 0h1m2 0h2m1 0h3m1 0h2m-25 1h1m5 0h1m2 0h2m1 0h1m1 0h3m1 0h3m-21 1h7m1 0h1m1 0h3m3 0h3m2 0h1m2 0h1"/></svg>
+                        <span>Mes réalisations<br>github.com/medmek</span>
+                    </a>
                 </div>
             </section>
         </div>
