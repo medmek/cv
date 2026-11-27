@@ -380,11 +380,6 @@ a:hover {
     gap: 2px;
 }
 
-.tech-line .tech-label {
-    font-weight: 700;
-    color: var(--accent);
-    margin-right: 2px;
-}
 
 [title] {
     cursor: help;
@@ -423,18 +418,15 @@ a:hover {
     line-height: 1.38;
 }
 
+.project-tech {
+    font-weight: 600;
+    color: var(--accent);
+}
+
 /* i18n: FR is the default; ?lang=en or the toggle switches <html lang> */
 :root[lang="fr"] [lang="en"],
 :root[lang="en"] [lang="fr"] {
     display: none !important;
-}
-
-:root[lang="fr"] .tech-label::after {
-    content: ' :';
-}
-
-:root[lang="en"] .tech-label::after {
-    content: ':';
 }
 
 .toolbar {
