@@ -511,4 +511,7 @@ a:hover {
     .toolbar {
         display: none;
     }
+
+    .sidebar { gap: 13px; }
+    .sidebar .tag { padding: 2px 4px; }
 }
